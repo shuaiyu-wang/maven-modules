@@ -16,5 +16,7 @@ public class MapTest {
         List<String> collect = Arrays.stream(integers).map(String::valueOf).collect(Collectors.toList());
 
 
+
+
     }
 }
