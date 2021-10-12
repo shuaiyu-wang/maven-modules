@@ -6,6 +6,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * 1. 我们自定义一个handler 需要继承netty 规定好的某个HandlerAdapter
  * 2. 这时我们自定义一个Handler，才能称之为Handler
@@ -19,12 +21,39 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        System.out.println("服务器读取线程 " + Thread.currentThread().getName());
         System.out.println("server ctx = " + ctx);
         // 将msg 转成一个ByteBuf
         // ByteBuf 是netty 提供的，不是NIO 的ByteBuffer
         ByteBuf byteBuf = (ByteBuf) msg;
         System.out.println("客户端发送的消息是：" + byteBuf.toString(CharsetUtil.UTF_8));
         System.out.println("客户端地址：" + ctx.channel().remoteAddress());
+
+        // 如果这里我们有一个非常耗时的业务 -> 异步执行 -> 提交该channel 对应的 NioEventLoop 的 taskQueue中
+        // 用户自定义的普通任务
+        // 10秒钟后发送给客户端
+        ctx.channel().eventLoop().execute(()->{
+            try {
+                Thread.sleep(10 * 1000);
+                ctx.writeAndFlush(Unpooled.copiedBuffer("hello client "+ System.currentTimeMillis() +" O(∩_∩)O 111", CharsetUtil.UTF_8));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        // 30秒钟后发送给客户端
+        ctx.channel().eventLoop().execute(()->{
+            try {
+                Thread.sleep(20 * 1000);
+                ctx.writeAndFlush(Unpooled.copiedBuffer("hello client "+ System.currentTimeMillis() +" O(∩_∩)O 222", CharsetUtil.UTF_8));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        // 用户自定义定时任务 -> 该任务是提交到 scheduleTaskQueue 中
+        ctx.channel().eventLoop().schedule(()->{
+            ctx.writeAndFlush(Unpooled.copiedBuffer("hello client "+ System.currentTimeMillis() +" O(∩_∩)O 333", CharsetUtil.UTF_8));
+        }, 5, TimeUnit.SECONDS);
     }
 
     // 数据读取完毕

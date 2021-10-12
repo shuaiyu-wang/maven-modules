@@ -12,7 +12,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 public class NettyClient {
     public static void main(String[] args) {
         // 客户端只需要一个事件循环组
-        EventLoopGroup eventExecutors = new NioEventLoopGroup();
+        EventLoopGroup eventExecutors = new NioEventLoopGroup(1);
         try {
             // 创建客户端启动对象
             // 注意客户端使用的不是ServerBootStrap 而是BootStrap
