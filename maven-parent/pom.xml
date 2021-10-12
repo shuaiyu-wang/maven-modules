@@ -32,6 +32,7 @@
         <!--自定义标签名称-->
         <!-- 通常管理依赖的版本号的标签名称 = 项目名称+字段version -->
         <junit-version>4.12</junit-version>
+        <netty-version>4.1.20.Final</netty-version>
     </properties>
 
     <!-- 父工程加强管理子工程的依赖 -->
@@ -42,6 +43,11 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
