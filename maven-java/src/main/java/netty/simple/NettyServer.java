@@ -42,6 +42,17 @@ public class NettyServer {
 
             // 绑定一个端口并且同步，生成一个ChannelFuture 对象
             ChannelFuture channelFuture = serverBootstrap.bind(6668).sync();
+            // 给channelFuture 注册监听器，监控我们关心的事件
+            channelFuture.addListener(new ChannelFutureListener() {
+                @Override
+                public void operationComplete(ChannelFuture future) throws Exception {
+                    if (future.isSuccess()) {
+                        System.out.println("监听端口 6668 成功");
+                    } else {
+                        System.out.println("监听端口 6668 失败");
+                    }
+                }
+            });
             // 对关闭通道进行监听
             channelFuture.channel().closeFuture().sync();
         } catch (Exception e) {
