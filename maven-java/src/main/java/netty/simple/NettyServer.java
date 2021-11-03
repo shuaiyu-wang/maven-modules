@@ -1,11 +1,14 @@
 package netty.simple;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.ServerSocketChannel;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.util.CharsetUtil;
 
 public class NettyServer {
 
@@ -35,6 +38,7 @@ public class NettyServer {
                             // 在推送消息时，可以将业务加入到各个socketChannel 对应的NioEvenLoop 或者 scheduleTaskQueue
                             System.out.println("客户 socketChannel hashcode=" + ch.hashCode());
                             ChannelPipeline pipeline = ch.pipeline();
+                            pipeline.addLast(new DelimiterBasedFrameDecoder(10 * 1024 * 1024, false, Unpooled.copiedBuffer("喵喵喵", CharsetUtil.UTF_8)));
                             pipeline.addLast(new NettyServerHandler());
                         }
                     }); // 给我们的workerGroup 的 EventLoop 对应的管道设置处理器

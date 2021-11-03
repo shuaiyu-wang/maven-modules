@@ -12,7 +12,11 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("client ctx: " + ctx);
-        ctx.writeAndFlush(Unpooled.copiedBuffer("hello server 喵喵喵", CharsetUtil.UTF_8));
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < 10000; i++) {
+            stringBuilder.append("hello server 喵喵喵");
+        }
+        ctx.writeAndFlush(Unpooled.copiedBuffer(stringBuilder.toString(), CharsetUtil.UTF_8));
     }
 
     // 当通道读取时间时，会触发
