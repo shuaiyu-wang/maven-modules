@@ -33,6 +33,7 @@
         <!-- 通常管理依赖的版本号的标签名称 = 项目名称+字段version -->
         <junit-version>4.12</junit-version>
         <netty-version>4.1.20.Final</netty-version>
+        <protobuf-version>3.16.0</protobuf-version>
     </properties>
 
     <!-- 父工程加强管理子工程的依赖 -->
@@ -48,6 +49,11 @@
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
                 <version>${netty-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${protobuf-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
