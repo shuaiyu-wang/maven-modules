@@ -1,14 +1,11 @@
-package netty.codec;
+package netty.codec2;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufDecoder;
-import io.netty.util.CharsetUtil;
 
 public class NettyServer {
 
@@ -37,7 +34,7 @@ public class NettyServer {
                             ChannelPipeline pipeline = ch.pipeline();
                             // pipeline 中加入ProtobufDecoder
                             // 指定对哪种对象进行解码
-                            pipeline.addLast("decoder", new ProtobufDecoder(StudentPOJO.Student.getDefaultInstance()));
+                            pipeline.addLast("decoder", new ProtobufDecoder(MyDataInfo.MyMessage.getDefaultInstance()));
                             pipeline.addLast(new NettyServerHandler());
                         }
                     }); // 给我们的workerGroup 的 EventLoop 对应的管道设置处理器

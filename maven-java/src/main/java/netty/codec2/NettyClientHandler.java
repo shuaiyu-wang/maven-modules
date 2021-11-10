@@ -1,19 +1,30 @@
-package netty.codec;
+package netty.codec2;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
+import netty.codec.StudentPOJO;
+
+import java.util.Random;
 
 public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 
     // 当通道就绪就会触发该方法
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        // 发送一个Student 对象到服务器
-        StudentPOJO.Student student = StudentPOJO.Student.newBuilder().setId(1).setName("智多星 吴用").build();
-        ctx.writeAndFlush(student);
+        // 随机发送一个Student 对象 或者一个Worker 对象到服务器
+        int random = new Random().nextInt(3);
+        MyDataInfo.MyMessage myMessage = null;
+        if (0 == random) { // 发送Student 对象
+            myMessage = MyDataInfo.MyMessage.newBuilder().setDataType(MyDataInfo.MyMessage.DataType.StudentType)
+                    .setStudent(MyDataInfo.Student.newBuilder().setId(1).setName("玉麒麟 卢俊义").build()).build();
+
+        } else { // 发送Worker 对象
+            myMessage = MyDataInfo.MyMessage.newBuilder().setDataType(MyDataInfo.MyMessage.DataType.WorkerType)
+                    .setWorker(MyDataInfo.Worker.newBuilder().setAge(21).setName("老王").build()).build();
+        }
+        ctx.writeAndFlush(myMessage);
     }
 
     // 当通道读取时间时，会触发

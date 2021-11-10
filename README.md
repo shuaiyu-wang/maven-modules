@@ -2,12 +2,14 @@ maven 多模块管理
 
 https://www.bilibili.com/video/BV1kg4y187td?spm_id_from=333.999.0.0
 
-netty nio
+netty
 
 https://www.bilibili.com/video/BV1DJ411m7NR?p=1
 
-protobuf
+* nio
+* zero copy
+* netty
+* protobuf
+  * https://developers.google.com/protocol-buffers/docs/proto3#scalar
 
-https://developers.google.com/protocol-buffers/docs/proto3#scalar
 
-https://www.bilibili.com/video/BV1DJ411m7NR?p=75&spm_id_from=pageDriver
