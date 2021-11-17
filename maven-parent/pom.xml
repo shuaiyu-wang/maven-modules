@@ -9,7 +9,8 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>../maven-java</module>
+        <module>../maven-netty</module>
+        <module>../maven-flink</module>
     </modules>
 
     <!--
@@ -34,6 +35,8 @@
         <junit-version>4.12</junit-version>
         <netty-version>4.1.20.Final</netty-version>
         <protobuf-version>3.16.0</protobuf-version>
+        <flink-java-version>1.10.1</flink-java-version>
+        <flink-streaming-java-version>1.10.1</flink-streaming-java-version>
     </properties>
 
     <!-- 父工程加强管理子工程的依赖 -->
@@ -54,6 +57,16 @@
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>
                 <version>${protobuf-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-java</artifactId>
+                <version>${flink-java-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-streaming-java_2.12</artifactId>
+                <version>${flink-streaming-java-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
