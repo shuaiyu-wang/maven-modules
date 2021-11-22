@@ -7,10 +7,13 @@ https://www.bilibili.com/video/BV1kg4y187td?spm_id_from=333.999.0.0
 https://www.bilibili.com/video/BV1DJ411m7NR?p=1
 * nio
 * zero copy
-* netty
 * protobuf
   * https://developers.google.com/protocol-buffers/docs/proto3#scalar
 
 ## flink
+
+## k8s
+
+## spring cloud
 
 
