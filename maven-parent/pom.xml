@@ -11,6 +11,7 @@
     <modules>
         <module>../maven-netty</module>
         <module>../maven-flink</module>
+        <module>../JVMDemo</module>
     </modules>
 
     <!--
