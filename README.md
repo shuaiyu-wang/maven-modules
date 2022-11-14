@@ -8,7 +8,7 @@ https://www.bilibili.com/video/BV1DJ411m7NR?p=1
 * nio
 * zero copy
 * protobuf
-  * https://developers.google.com/protocol-buffers/docs/proto3#scalar
+  * https://developers.google.cn/protocol-buffers/docs/proto3
 
 ## flink
 https://www.bilibili.com/video/BV1qy4y1q728
